@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Top 10 CUP RAMEN</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ramen_style.css' %}">
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center p-3">
+      <div class="fs-4 fw-bold">CUPRAVIEW</div>
+      <div>
+      {% if request.session.user_id %}
+        <span>{{ request.session.user_nickname }} 님</span>
+        <a href="{% url 'logout' %}" class="ms-3 text-decoration-none text-white">로그아웃</a>
+      {% else %}
+          <a href="{% url 'ramen_login' %}" class="text-decoration-none text-white">로그인</a>
+          <a href="{% url 'ramen_signup' %}" class="text-decoration-none text-white">회원가입</a>
+      {% endif %}
+      </div>
+    </header>
+
+
+    <div class="bg-white py-3">
+      <form method="GET" action="{% url 'search' %}" class="container d-flex justify-content-center">
+        <input type="text" name="q" class="form-control w-50 me-2" placeholder="라면을 검색하세요" value="{{ request.GET.q }}">
+        <button type="submit" class="btn btn-outline-secondary">검색</button>
+      </form>
+    </div>
+
+
+    <main class="container my-5">
+      <h2 class="text-center mb-4">TOP 10 Instant Noodles</h2>
+      <ul class="list-group">
+        {% for ramen in top_ramen %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              {{ forloop.counter }}.
+              <a href="{% url 'ramen_detail' ramen.id %}" class="text-decoration-none text-dark">
+                {{ ramen.ramen_name }}
+              </a>
+              <span class="text-muted small ms-2">♥ {{ ramen.like_number }}</span>
+              <img src="{{ ramen.image_url }}" alt="{{ ramen.ramen_name }}">
+            </div>
+            <span>{{ ramen.rating }}</span>
+          </li>
+        {% empty %}
+          <li class="list-group-item">리스트가 없습니다.</li>
+        {% endfor %}
+      </ul>
+    </main>
+
+
+</body>
+</html>

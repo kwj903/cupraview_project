@@ -1,0 +1,43 @@
+    body {
+      background-color: #fff3e0;
+      /* 살짝 따뜻한 오렌지 배경 */
+    }
+
+    header {
+      background-color: #ff7043;
+      /* 밝고 강한 주황 */
+      color: white;
+    }
+
+    header .fs-4 {
+      font-size: 2rem;
+    }
+
+    .btn-outline-secondary {
+      color: #ff5722;
+      /* 다채로운 오렌지 */
+      border-color: #ff5722;
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: #ff5722;
+      color: white;
+    }
+
+    h2 {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 3rem;
+      color: #ff6f00;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+    }
+
+    .list-group-item {
+      background-color: #ffe0b2;
+      /* 부드러운 연한 오렌지 */
+    }
+
+    .list-group-item:hover {
+      background-color: #ffb74d;
+      /* 살짝 짙은 오렌지 */
+    }

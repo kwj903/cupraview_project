@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="container">
+  <div class="card p-4 shadow-sm rounded text-center" style="min-width: 400px;">
+      <h5 class="mb-4 text-danger">정말로 회원 탈퇴하시겠습니까?</h5>
+      <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger w-100">네, 탈퇴할게요</button>
+      </form>
+      <a class="btn btn-link mt-3">취소하고 돌아가기</a>
+  </div>
+</div>
+{% endblock %}

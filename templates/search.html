@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컵라뷰</title>
+    <link rel="stylesheet" href="search.css">
+
+</head>
+<body>
+    <form action="{% url 'search' %}" method="GET">
+        <input type="varchar" name="query" placeholder="컵라면 이름을 입력하세요" maxlength="40" required>
+        <button type="submit">검색</button>
+    </form>
+    <div id="results">
+        {%if query%}
+            {% if results %}
+                <ul>
+                    {% for ramen in results %}
+                        <li>
+                            <a>
+                                <img src="{{ ramen.image_url }}" alt="{{ ramen.ramen_name }}" style="width:100px; height:auto;"> <!-- db에서 이미지 가져오기-->
+                            </a>
+                            <div>{{ ramen.ramen_name }}</div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>검색 결과가 없습니다.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    <a href="/search">돌아가기</a>
+</body>
+</html>

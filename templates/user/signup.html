@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-warning">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+<div class="container">
+  <div class="card p-4 shadow-sm rounded" style="min-width: 400px;">
+      <h4 class="text-center mb-4">회원가입</h4>
+      <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+              <label class="form-label">이메일</label>
+              <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">닉네임</label>
+              <input type="text" name="nickname" class="form-control" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">비밀번호</label>
+              <input type="password" name="password1" class="form-control" required>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">비밀번호 확인</label>
+              <input type="password" name="password2" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-success w-100">회원가입</button>
+      </form>
+      <div class="text-center mt-3">
+          <a>이미 계정이 있으신가요?</a>
+      </div>
+  </div>
+</div>
+{% endblock %}

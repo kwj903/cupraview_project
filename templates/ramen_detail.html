@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ ramen.ramen_name }}</h1>
+<p>좋아요 ♥ {{ ramen.like_number }}</p>
+
+<h2>📝 리뷰 작성</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="ramen">라면 선택:</label>
+    <select name="ramen_id" required>
+        {% for ramen in ramens %}
+            <option value="{{ ramen.id }}">{{ ramen.ramen_name }}</option>
+        {% endfor %}
+    </select>
+    <br><br> 
+    <label for="content">리뷰 내용 (최대 400자):</label><br>
+    <textarea name="content" rows="4" cols="50" maxlength="400" required></textarea>
+    <br><br>
+   
+    <button onclick="increaseLike({{ ramen.id }})">좋아요</button>
+    <button type="submit">작성 완료</button>
+</form>
+
+{% endblock %}
