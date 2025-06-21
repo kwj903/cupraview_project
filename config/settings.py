@@ -27,15 +27,22 @@ SECRET_KEY = 'django-insecure-i*k1$ev2muk+#e_!&17i&1bc^nx52gg*-2lt&cm_d=!o)eu2nr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
+# ngrok 주소 환경변수에서 불러오기
 ngrok_url = config("NGROK_DOMAIN", default="")
 ngrok_host = urlparse(ngrok_url).netloc if ngrok_url else ""
 
+# ALLOWED_HOSTS 설정
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 if ngrok_host:
     ALLOWED_HOSTS.append(ngrok_host)
 
-
+# CSRF_TRUSTED_ORIGINS 설정
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+if ngrok_url:
+    CSRF_TRUSTED_ORIGINS.append(ngrok_url)
 # Application definition
 
 INSTALLED_APPS = [
@@ -130,8 +137,6 @@ TIME_ZONE = "Asia/Seoul"
 USE_I18N = True
 
 USE_TZ = True
-
-CSRF_TRUSTED_ORIGINS = [os.environ.get("NGROK_DOMAIN")]
 
 
 # Static files (CSS, JavaScript, Images)
