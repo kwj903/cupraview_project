@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  {% if form.non_field_errors %}
+    <div class="text-danger mb-3">
+      {{ form.non_field_errors.0 }}
+    </div>
+  {% endif %}
+  <div class="card p-4 shadow-sm rounded text-center" style="min-width: 400px;">
+      <h5 class="mb-4 text-danger">정말로 회원 탈퇴하시겠습니까?</h5>
+      <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="password1" class="form-label">비밀번호를 입력해주세요</label>
+            <input type="password" class="form-control" id="password1" name="password1" required>
+            {% if form.password1.errors %}
+              <div class="text-danger small">{{ form.password1.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label for="password2" class="form-label">비밀번호 확인</label>
+            <input type="password" class="form-control" id="password2" name="password2" required>
+            {% if form.password2.errors %}
+              <div class="text-danger small">{{ form.password2.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-danger w-100">네, 탈퇴할게요</button>
+      </form>
+      <a class="btn btn-link mt-3" href="{% url 'main_page' %}">취소하고 돌아가기</a>
+  </div>
+</div>
+{% endblock %}

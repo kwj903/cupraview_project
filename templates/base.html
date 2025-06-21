@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}CUPRAVIEW{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/ramen_style.css' %}">
+  <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+
+
+  <!-- 헤더 영역 -->
+  <header class="header d-flex justify-content-between align-items-center p-3">
+    <!-- 왼쪽: 로고 -->
+    <a href="{% url 'main_page' %}" class="d-block">
+      <img src="{% static 'image/logo.png' %}" alt="CUPRAVIEW 로고"
+          style="height: 80px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    </a>
+
+    <!-- 오른쪽: 버튼 그룹 -->
+    <div class="d-flex align-items-center gap-2">
+      {% if request.session.user_id %}
+        <a href="{% url 'update_profile' %}" class="btn btn-outline-light px-3 fw-semibold">
+          {{ request.session.user_nickname }} 님
+        </a>
+        <a href="{% url 'logout' %}" class="btn btn-light fw-semibold">로그아웃</a>
+      {% else %}
+        <a href="{% url 'ramen_login' %}" class="btn btn-outline-light fw-semibold">로그인</a>
+        <a href="{% url 'ramen_signup' %}" class="btn btn-warning text-dark fw-semibold">회원가입</a>
+      {% endif %}
+    </div>
+  </header>
+
+
+  <!-- 메인 콘텐츠 영역 -->
+  <main class="container my-5">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+
+    {% block content %}
+    {% endblock %}
+  </main>
+
+
+  <!-- 푸터 영역 -->
+  <footer class="footer-soft-orange text-center py-4 mt-5">
+    <p class="mb-1">관리자 이메일: <a href="mailto:admin@cupraview.com" class="text-black text-decoration-underline">admin@cupraview.com</a></p>
+    <p class="mb-0">고객센터: 02-1234-5678</p>
+    <small>&copy; 2025 CUPRAVIEW. All rights reserved.</small>
+  </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CUPRAVIEW{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <!-- 라면 정보 (가로 정렬 + 간격 1cm) -->
+  <div class="d-flex flex-row align-items-start mb-4" style="gap: 38px;">
+    <!-- 라면 이미지 -->
+    <div class="text-start">
+      <img src="{{ ramen.image_url }}" alt="{{ ramen.ramen_name }}" class="img-fluid rounded shadow-sm" style="max-height: 150px;">
+    </div>
+    <!-- 라면 이름 + 좋아요 -->
+    <div class="d-flex flex-column align-items-start text-start">
+      <h2 class="fw-bold mb-2">{{ ramen.ramen_name }}</h2>
+      <p class="text-muted mb-1">♥ 좋아요 {{ ramen.like_number }}</p>
+      <form method="POST" action="{% url 'like_review_increase' ramen.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-sm">♥ 좋아요</button>
+      </form>
+    </div>
+  </div>
+  <!-- 리뷰 목록 -->
+  <div class="w-100">
+    <h4 class="mb-3">사용자 리뷰</h4>
+    {% if ramen.review_set.all %}
+      {% for review in ramen.review_set.all %}
+        <div class="list-group-item mb-3">
+          <div class="d-flex justify-content-between">
+            <strong>{{ review.user_id.nickname }}</strong>
+            <small class="text-muted">{{ review.created_at|date:"Y.m.d H:i" }}</small>
+          </div>
+          {% if review.id == review_to_edit.id %}
+            <form method="POST">
+              {% csrf_token %}
+              <textarea name="content" rows="4" class="form-control my-2" maxlength="400" required>{{ review.content }}</textarea>
+              <button type="submit" class="btn btn-cupraview btn-sm">수정 완료</button>
+            </form>
+          {% else %}
+            <p class="mt-2 mb-1">{{ review.content }}</p>
+          {% endif %}
+          {% if review.user_id.id == request.session.user_id %}
+            <div class="mt-2">
+              {% if review.id != review_to_edit.id %}
+                <a href="?edit={{ review.id }}" class="me-3">수정</a>
+              {% endif %}
+              <form action="{% url 'review_delete' pk=review.id %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link btn-sm text-danger p-0" onclick="return confirm('정말 삭제하시겠습니까?');">삭제</button>
+              </form>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-muted">아직 작성된 리뷰가 없습니다.</p>
+    {% endif %}
+  </div>
+</div>
+
+  <!-- 리뷰 작성 폼 -->
+  <div class="bg-light p-4 rounded shadow-sm mt-5">
+    <h5 class="mb-3"> 리뷰 작성하기</h5>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="content" class="form-label">내용 (최대 400자)</label>
+        <textarea name="content" class="form-control" rows="4" maxlength="400" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-cupraview">작성 완료</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+

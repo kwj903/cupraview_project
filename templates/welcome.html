@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+WELCOME!!
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center bg-light">
+  <div class="card shadow p-4 border-0">
+    <h1 class="display-4 mb-3" style="color: orange;">🎉 Cupraview에 오신 걸 환영합니다!</h1>
+    <p class="lead mb-4">
+      편의점 컵라면 리뷰 커뮤니티에 들어오셨어요.<br>
+      맛있는 컵라면 정보를 나누고 싶다면 지금 시작해보세요.
+    </p>
+    <a href="{% url 'main_page' %}" class="btn btn-lg px-4 py-2" style="background-color: #ff5722; color: white;">
+      👉 메인으로 이동
+    </a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block static %}
+<!-- static 연결 코드 -->
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="card p-4 shadow-sm rounded" style="min-width: 350px;">
+    <h4 class="text-center mb-4">로그인</h4>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- 이메일 입력 -->
+        <div class="mb-3">
+            <label for="username" class="form-label">이메일</label>
+            <input type="email" class="form-control" name="email"
+                   value="{{ form.email.value|default_if_none:'' }}" required>
+            {% if form.email.errors %}
+                <div class="text-danger small">{{ form.email.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <!-- 비밀번호 입력 -->
+        <div class="mb-3">
+            <label for="password" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" name="password" required>
+            {% if form.password.errors %}
+                <div class="text-danger small">{{ form.password.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <!-- 비밀번호 틀린 경우 등 -->
+        {% if form.non_field_errors %}
+            <div class="text-danger small mb-2 text-center">
+                {{ form.non_field_errors.0 }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary w-100">로그인</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <a href="{% url 'ramen_signup' %}">회원가입</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

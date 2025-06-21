@@ -1,0 +1,272 @@
+
+/* body 배경색 유지 */
+body {
+  background-color: #fff3e0;
+  /* 살짝 따뜻한 오렌지 배경 */
+  color: #333333;
+  font-family: 'Noto Sans KR', 'Arial', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-image: url('/static/image/bg.jpg');
+  /* 정적 파일 경로에 맞게 수정 */
+  background-size: cover;
+  background-position: center;
+  /* 배경 이미지 위치 중앙 */
+  background-repeat: no-repeat;
+  /* 반복 방지 */
+  min-height: 150px;
+  /* 헤더 높이 조절 (필요에 따라 변경) */
+}
+
+
+
+
+/* 버튼 .btn-outline-secondary 스타일 변경 */
+.btn-outline-secondary {
+  color: #a1c423;
+  /* 다채로운 오렌지 */
+  border-color: #f14e0e;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 로그인/로그아웃/회원가입 배경 음영*/
+.bg-transparent-gray {
+  background-color: rgba(128, 128, 128, 0.4);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+
+.btn-outline-secondary:hover {
+  background-color: #ff5722;
+  color: white;
+}
+
+
+/* h2 스타일 (메인 타이틀)  TOP 10 Instant Cup Noodles */
+h2 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 3rem;
+  color: #663d1e;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+
+/* 리스트 그룹 스타일 */
+.list-group {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+/* 리스트 아이템 스타일 */
+.list-group-item {
+  background-color: #ffe0b2;
+  /* 부드러운 연한 오렌지 */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+
+.list-group-item:hover {
+  background-color: #d81b4a;
+  /* 살짝 짙은 오렌지 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 라면 정보 영역 */
+.ramen-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+/* 라면 이름 */
+.ramen-name {
+  font-weight: 700;
+  color: #222831;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+
+.ramen-name:hover {
+  color: #00adb5;
+  text-decoration: underline;
+}
+
+
+/* 좋아요 수 */
+.ramen-like {
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+
+/* 불꽃 강조 텍스트 */
+.text-rank-highlight {
+  color: #e69500;
+  /* 진한 주황색 */
+  font-weight: 700;
+}
+
+
+/* 로그인/회원가입 버튼 통일 스타일 */
+.btn-cupraview {
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  font-weight: 600;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.btn-cupraview:hover {
+  background-color: #703b2b;
+  color: white;
+}
+
+
+/* 검색바 스타일 */
+.search-bar {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+  background-color: #fff;
+}
+
+
+/* 검색 입력창 */
+.search-bar input.form-control {
+  border-radius: 0.375rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+
+/* 검색 버튼 */
+.search-bar button.btn-outline-secondary {
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+
+
+/* 결과 리스트 영역 */
+#results ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+#results li {
+  width: 150px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fafafa;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+
+#results li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+#results img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+
+#results a:hover img {
+  transform: scale(1.1);
+}
+
+
+#results div {
+  margin-top: 8px;
+  font-weight: 700;
+  color: #333;
+}
+
+
+/* 불꽃 배너 */
+.fire-banner {
+  width: 100%;
+  height: 60px;
+  /* 필요에 따라 조절 */
+  background-image: url("/static/image/fire.png");
+  background-repeat: repeat-x;
+  background-size: auto;
+}
+
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+  .search-bar form {
+    flex-direction: column;
+  }
+
+
+  .search-bar input.form-control {
+    width: 100% !important;
+    margin-bottom: 0.5rem;
+  }
+
+
+  .list-group {
+    max-width: 100%;
+  }
+}
+
+
+.footer-soft-orange {
+  background-color: #ffe0b2;
+  /* 리스트 배경색과 동일 */
+  color: #000000;
+  /* 검정 텍스트 */
+}
+
+
+.footer-soft-orange a {
+  color: #000000;
+  text-decoration: underline;
+}
+

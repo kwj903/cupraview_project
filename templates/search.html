@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container my-5">
+  <h3 class="mb-4"> 검색 결과</h3>
+
+
+  <div id="results">
+    {% if query %}
+      {% if results %}
+        <ul>
+          {% for ramen in results %}
+            <li>
+              <a href="{% url 'ramen_detail' ramen.id %}">
+                <img src="{{ ramen.image_url }}" alt="{{ ramen.ramen_name }}" />
+              </a>
+              <div>
+                <a href="{% url 'ramen_detail' ramen.id %}" class="text-decoration-none text-dark">
+                  {{ ramen.ramen_name }}
+                </a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">검색 결과가 없습니다.</p>
+      {% endif %}
+    {% endif %}
+  </div>
+
+
+  <div class="mt-4 text-center">
+    <a href="{% url 'main_page' %}" class="btn btn-cupraview">← 메인으로 돌아가기</a>
+  </div>
+</div>
+{% endblock %}
+

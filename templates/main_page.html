@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Top 10 CUP RAMEN
+{% endblock %}
+
+{% block content %}
+<!-- 메인 콘텐츠 -->
+<main class="container my-5">
+  <!-- 검색바 -->
+  <div class="bg-white py-3 rounded-3">
+    <form action="{% url 'search' %}" method="POST" class="container d-flex justify-content-center" onsubmit="return validateSearch()">
+      {% csrf_token %}
+      <input type="text" name="query" class="form-control w-50 me-2" placeholder="라면을 검색하세요" value="{{ request.POST.query }}" id="searchInput">
+      <button type="submit" class="btn btn-outline-secondary">검색</button>
+    </form>
+  </div>
+  <h2 class="text-center mb-4">TOP 10 Instant Cup Noodles</h2>
+  <ul class="list-group">
+    {% for ramen in top_ramen %}
+      <li class="list-group-item">
+        <div class="d-flex align-items-center">
+          <!-- 🔥 등수와 불 이미지 -->
+          <div class="me-3 text-center" style="width: 150px;">
+            {% if forloop.counter == 1 %}
+              <img src="{% static 'image/fire.png' %}" alt="fire" style="width: 20px;">
+              <img src="{% static 'image/fire.png' %}" alt="fire" style="width: 20px;">
+              <img src="{% static 'image/fire.png' %}" alt="fire" style="width: 20px;">
+            {% elif forloop.counter == 2 %}
+              <img src="{% static 'image/fire.png' %}" alt="fire" style="width: 20px;">
+              <img src="{% static 'image/fire.png' %}" alt="fire" style="width: 20px;">
+            {% elif forloop.counter == 3 %}
+              <img src="{% static 'image/fire.png' %}" alt="fire" style="width: 20px;">
+            {% endif %}
+            <div class="fw-bold fs-5 text-rank-highlight">
+              {{ forloop.counter }}위
+            </div>
+          </div>
+          <!-- 라면 이미지 -->
+          <img src="{{ ramen.image_url }}" alt="{{ ramen.ramen_name }}" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+          <!-- 라면 정보 -->
+          <div class="ramen-info">
+            <a href="{% url 'ramen_detail' ramen.id %}" class="ramen-name">
+              {{ ramen.ramen_name }}
+            </a>
+            <div class="ramen-like"> ♥ {{ ramen.like_number }}</div>
+          </div>
+        </div>
+      </li>
+    {% empty %}
+      <li class="list-group-item">리스트가 없습니다.</li>
+    {% endfor %}
+  </ul>
+</main>
+<!-- 검색어 유효성 검사 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function validateSearch() {
+    const query = document.getElementById("searchInput").value.trim();
+    if (query === "") {
+      Swal.fire({
+        icon: 'warning',
+        title: '검색어가 비어있어요!',
+        text: '검색어를 입력한 후 다시 시도해주세요.'
+      });
+      return false;
+    }
+    return true;
+  }
+</script>
+{% endblock %}
+

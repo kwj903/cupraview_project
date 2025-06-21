@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="card p-4 shadow-sm rounded" style="min-width: 400px;">
+      <h4 class="text-center mb-4">회원가입</h4>
+      <form method="post">
+          {% csrf_token %}
+
+          <!-- 이메일 -->
+          <div class="mb-3">
+            <label for="id_email" class="form-label">이메일</label>
+            <input type="email" name="email" id="id_email" class="form-control" 
+            value="{{ form.email.value|default_if_none:'' }}" required>
+            {% if form.email.errors %}
+                <div class="text-danger small">{{ form.email.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <!-- 닉네임 -->
+          <div class="mb-3">
+            <label for="id_nickname" class="form-label">닉네임</label>
+            <input type="text" name="nickname" id="id_nickname" class="form-control"
+            value="{{ form.nickname.value|default_if_none:'' }}" required>
+            {% if form.nickname.errors %}
+                <div class="text-danger small">{{ form.nickname.errors.0 }}</div>
+            {% endif %}
+          </div>
+
+          <!-- 비밀번호 -->
+          <div class="mb-3">
+              <label for="id_password1" class="form-label">비밀번호</label>
+              <input type="password" name="password1" id="id_password1" class="form-control" required>
+              {% if form.password1.errors %}
+                  <div class="text-danger small">{{ form.password1.errors.0 }}</div>
+              {% endif %}
+          </div>
+
+          <!-- 비밀번호 확인 -->
+          <div class="mb-3">
+              <label for="id_password2" class="form-label">비밀번호 확인</label>
+              <input type="password" name="password2" id="id_password2" class="form-control" required>
+              {% if form.password2.errors %}
+                  <div class="text-danger small">{{ form.password2.errors.0 }}</div>
+              {% endif %}
+          </div>
+
+          <!-- 전체 폼 에러 (예: clean 메서드에서 발생한 에러) -->
+          {% if form.non_field_errors %}
+              <div class="text-danger small text-center">
+                  {{ form.non_field_errors.0 }}
+              </div>
+          {% endif %}
+
+          <button type="submit" class="btn btn-success w-100">회원가입</button>
+      </form>
+
+      <div class="text-center mt-3">
+          <a href="{% url 'ramen_login' %}">이미 계정이 있으신가요?</a>
+      </div>
+  </div>
+</div>
+{% endblock %}
